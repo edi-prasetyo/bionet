@@ -63,7 +63,6 @@ $meta = $this->meta_model->get_meta();
     $user           = $this->user_model->user_detail($id);
     $meta           = $this->meta_model->get_meta();
     $menu           = $this->menu_model->get_menu();
-
     ?>
 
     <form id="payment-form" method="post" action="<?= base_url() ?>/snap/finish">
@@ -104,8 +103,6 @@ $meta = $this->meta_model->get_meta();
                             <?php endif; ?>
                         </a>
                     </li>
-
-
                 </ul>
 
                 <ul class="nav" style="font-size: 18px;">
@@ -135,24 +132,32 @@ $meta = $this->meta_model->get_meta();
                             <?php endif; ?>
                         </a>
                     </li>
-
-
-
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container my-5 pt-5">
-        <div class="row m-0">
 
-            <div class="col-md-5 col-12 ps-md-5 p-0 mx-auto">
-                <div class="box-left">
-                    <p class="textmuted h8">Invoice</p>
-                    <p class="fw-bold h7"><?php echo $transaction->fullname; ?></p>
-                    <p class="textmuted h8"><?php echo $transaction->address; ?></p>
-                    <p class="textmuted h8 mb-2"><?php echo $transaction->whatsapp; ?></p>
-                    <div class="h8">
+
+        <div class="col-md-7 mx-auto">
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-start">
+                    <div>Invoice</div>
+                    <div><?php echo $transaction->invoice_number; ?></div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            Nama Pelanggan : <?php echo $transaction->fullname; ?><br>
+                            Alamat : <?php echo $transaction->address; ?>
+
+                        </div>
+                        <div class="col-6 text-end">
+                            No. Whatsapp : <?php echo $transaction->whatsapp; ?><br>
+                            Email : <?php echo $transaction->email; ?>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -160,7 +165,7 @@ $meta = $this->meta_model->get_meta();
                                         <th scope="col">Item</th>
                                         <th scope="col">Qty</th>
                                         <th scope="col">Amount</th>
-                                        <th scope="col">Total</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,7 +173,7 @@ $meta = $this->meta_model->get_meta();
                                         <th><?php echo $transaction->product_name; ?></th>
                                         <td>1</td>
                                         <td><?php echo number_format($transaction->amount, 0, ",", "."); ?></td>
-                                        <td><?php echo number_format($transaction->total_amount, 0, ",", "."); ?></td>
+
                                     </tr>
 
                                 </tbody>
@@ -182,18 +187,21 @@ $meta = $this->meta_model->get_meta();
                             <p class="alert alert-danger">Silahkan lakukan Pembayaran Sebelum tanggal 14 januari 2022 </p>
                         </div>
                     </div>
-                    <div class="">
 
-                        <div class="form">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-block h8" data-bs-toggle="modal" data-bs-target="#exampleModal">Bayar Rp. <?php echo number_format($transaction->total_amount, 0, ",", "."); ?><span class="ms-3 fas fa-arrow-right"></span></button>
-                            </div>
+                    <div class="form">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-block h8" data-bs-toggle="modal" data-bs-target="#exampleModal">Bayar Rp. <?php echo number_format($transaction->total_amount, 0, ",", "."); ?><span class="ms-3 fas fa-arrow-right"></span></button>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </div>
+
+
     </div>
+
 
 
 
@@ -210,7 +218,6 @@ $meta = $this->meta_model->get_meta();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
