@@ -1,16 +1,8 @@
-@font-face {
-	font-family: Inter;
-	src: url(../vendor/fonts/inter/Inter-Regular.ttf);
-}
-@font-face {
-	font-family: Inter;
-	src: url(../vendor/fonts/inter/Inter-Light.ttf);
-	font-weight: 100;
-}
-@font-face {
-	font-family: Inter;
-	src: url(../vendor/fonts/inter/Inter-Bold.ttf);
-	font-weight: 700;
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
+body {
+	font-family: "Poppins", sans-serif;
+	font-weight: normal;
+	font-style: normal;
 }
 a:link {
 	text-decoration: none;

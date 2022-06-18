@@ -50,9 +50,9 @@ class Galery extends CI_Controller
         'keywords'                    => 'Galery - ' . $meta->keywords,
         'paginasi'                    => $this->pagination->create_links(),
         'galery'                      => $galery,
-        'content'                     => 'mobile/galery/index'
+        'content'                     => 'front/galery/index'
       );
-      $this->load->view('mobile/layout/wrapp', $data, FALSE);
+      $this->load->view('front/layout/wrapp', $data, FALSE);
     }
   }
   public function detail($galery_slug = NULL)

@@ -138,9 +138,9 @@ class Auth extends CI_Controller
 					'title'			=> 'Register',
 					'deskripsi'		=> 'Deskripsi',
 					'keywords'		=> 'Keywords',
-					'content'       => 'mobile/auth/register'
+					'content'       => 'front/auth/register'
 				];
-				$this->load->view('mobile/layout/wrapp', $data, FALSE);
+				$this->load->view('front/layout/wrapp', $data, FALSE);
 			}
 		} else {
 			$email = $this->input->post('email', true);

@@ -27,6 +27,15 @@ class Product_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    public function product_voucher()
+    {
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('product_type', 'voucher');
+        $this->db->order_by('product.price', 'ASC');
+        $query = $this->db->get();
+        return $query->result();
+    }
     //Detail Product
     public function detail($id)
     {

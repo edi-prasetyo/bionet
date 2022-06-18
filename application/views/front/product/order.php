@@ -7,7 +7,7 @@
                         <div class="col-md-7 ps-0 ">
                             <p class="textmuted fw-bold h6 mb-0">TOTAL PEMBELIAN</p>
                             <p class="h1 fw-bold d-flex">Rp. <?php echo number_format($product->price, 0, ",", "."); ?> </p>
-                            <p class="ms-3 px-2 bg-green">per Bulan</p>
+                            <p class="text-muted">Speed Up to <?php echo $product->speed; ?> Mbps</p>
                         </div>
                         <div class="col-md-5">
                             <h3><?php echo $product->product_name; ?></h3>
@@ -47,7 +47,9 @@
                                 <textarea class="form-control" name="address" placeholder="Alamat"></textarea>
                             </div>
                             <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-primary btn-block">Checkout</button>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-block"> <i class="fa-solid fa-bag-shopping"></i> Checkout</button>
+                                </div>
                             </div>
 
                         </div>

@@ -43,7 +43,7 @@ $menu           = $this->menu_model->get_menu();
 
       </ul>
 
-      <ul class="nav" style="font-size: 18px;">
+      <!-- <ul class="nav" style="font-size: 18px;">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php if ($this->session->userdata('language') == 'EN') : ?>
@@ -62,18 +62,16 @@ $menu           = $this->menu_model->get_menu();
         <li class="nav-item">
           <a class="btn btn-primary text-white" href="https://api.whatsapp.com/send?phone=<?php echo $meta->whatsapp; ?>">
             <?php if ($this->session->userdata('language') == 'EN') : ?>
-              Get Quote
+              Subscribe
             <?php elseif ($this->session->userdata('language') == 'ID') : ?>
-              Minta Penawaran
+              berlangganan
             <?php else : ?>
-              Minta Penawaran
+              berlangganan
             <?php endif; ?>
           </a>
         </li>
+      </ul> -->
 
-
-
-      </ul>
     </div>
   </div>
 </nav>

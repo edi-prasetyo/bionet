@@ -28,6 +28,7 @@ class Home extends CI_Controller
         $homepage                 = $this->homepage_model->get_homepage();
         $layanan                  = $this->layanan_model->get_layanan();
         $product_monthly          = $this->product_model->product_monthly();
+        $product_voucher          = $this->product_model->product_voucher();
         $slider                   = $this->galery_model->slider();
 
         // var_dump($slider);
@@ -43,6 +44,7 @@ class Home extends CI_Controller
             'homepage'              => $homepage,
             'layanan'               => $layanan,
             'product_monthly'               => $product_monthly,
+            'product_voucher'       => $product_voucher,
             'slider'                => $slider,
             'content'               => 'front/home/index'
         );

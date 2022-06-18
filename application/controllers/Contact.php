@@ -34,9 +34,9 @@ class Contact extends CI_Controller
                 'title'             => 'Contact Us',
                 'deskripsi'         => 'Berita - ' . $meta->description,
                 'keywords'          => 'Berita - ' . $meta->keywords,
-                'content'           => 'mobile/contact/index'
+                'content'           => 'front/contact/index'
             );
-            $this->load->view('mobile/layout/wrapp', $data, FALSE);
+            $this->load->view('front/layout/wrapp', $data, FALSE);
         }
     }
 }

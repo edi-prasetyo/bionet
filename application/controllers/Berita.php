@@ -78,9 +78,9 @@ class Berita extends CI_Controller
         'berita'                      => $berita,
         'berita_popular'              => $berita_popular,
         'category'                    => $category,
-        'content'                     => 'mobile/berita/index'
+        'content'                     => 'front/berita/index'
       );
-      $this->load->view('mobile/layout/wrapp', $data, FALSE);
+      $this->load->view('front/layout/wrapp', $data, FALSE);
     }
   }
   public function detail($berita_slug = NULL)
