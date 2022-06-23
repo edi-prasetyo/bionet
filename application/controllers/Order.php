@@ -129,8 +129,6 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
-            redirect(base_url(), 'refresh');
         } elseif ($result['payment_type'] == 'cstore') {
             $data = [
                 'id'                    => $transaksi_id,
@@ -142,8 +140,6 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
-            redirect(base_url(), 'refresh');
         } elseif ($result['payment_type'] == 'echannel') {
             $data = [
                 'id'                    => $transaksi_id,
@@ -156,8 +152,6 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
-            redirect(base_url(), 'refresh');
         } else {
             $data = [
                 'id'                    => $transaksi_id,
@@ -169,8 +163,6 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
-            redirect(base_url(), 'refresh');
         }
     }
 }
