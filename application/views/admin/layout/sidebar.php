@@ -5,164 +5,154 @@ $meta = $this->meta_model->get_meta();
 ?>
 
 
-<div class="d-flex" id="wrapper">
+<!-- Menu -->
 
-    <!-- Sidebar -->
-    <!-- Sidebar -->
-    <div class="border-end pb-5" id="sidebar-wrapper">
-        <div class="sidebar-heading text-transparent"> </div>
-        <div class="py-4 px-3">
-            <div class="media">
-                <img src="<?php echo base_url('assets/img/avatars/' . $user->user_image); ?>" alt="..." width="65" class="mr-3 rounded-circle shadow-sm">
-                <div class="media-body my-3">
-                    <h5 class="m-0 text-muted"><?php echo $user->user_name; ?></h5>
-                    <small class="font-weight-light mb-0 text-success"><i class="fas fa-circle text-success"></i> Online</small>
-                </div>
-            </div>
-        </div>
-        <p class="text-muted font-weight-bold text-uppercase px-3 small pb-2 mb-0"><b>Main</b></p>
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="index.html" class="app-brand-link">
+            <span class="app-brand-logo demo">
 
-        <ul class="nav flex-column  mb-0">
+            </span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">Bionet Admin</span>
+        </a>
 
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") {
-                                                                                            echo 'active';
-                                                                                        } ?>">
-                    <i class="feather-home  fa-fw"></i>
-                    Dashboard
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/product'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "product") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-shopping-cart mr-3  fa-fw"></i>
-                    Produk
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/transaction'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "transaction") {
-                                                                                            echo 'active';
-                                                                                        } ?>">
-                    <i class="feather-credit-card mr-3  fa-fw"></i>
-                    Transaksi
-                </a>
-            </li>
-            <!-- <li class="nav-item disabled">
-                <a href="<?php echo base_url('admin/report'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "report") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-pie-chart mr-3  fa-fw"></i>
-                    Laporan
-                </a>
-            </li> -->
-            <!-- <li class="nav-item">
-                <a href="<?php echo base_url('admin/customer'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "customer") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-users mr-3  fa-fw"></i>
-                    Customer
-                </a>
-            </li> -->
-            <!-- <li class="nav-item">
-                <a href="<?php echo base_url('admin/province'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "province") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-package mr-3  fa-fw"></i>
-                    Data Kota
-                </a>
-            </li> -->
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/bank'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "bank") {
-                                                                                    echo 'active';
-                                                                                } ?>">
-                    <i class="feather-credit-card mr-3  fa-fw"></i>
-                    Data Bank
-                </a>
-            </li>
-
-            <!-- <p class="text-muted font-weight-bold text-uppercase px-3 small py-2 mb-0"><b>Web Front</b></p>
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/homepage'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "homepage") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-book mr-3  fa-fw"></i>
-                    Homepage
-                </a>
-                <a href="<?php echo base_url('admin/berita'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "berita") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-rss mr-3  fa-fw"></i>
-                    Berita
-                </a>
-                <a href="<?php echo base_url('admin/category'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "category") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-tag mr-3  fa-fw"></i>
-                    Kategori
-                </a>
-                <a href="<?php echo base_url('admin/page'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "page") {
-                                                                                    echo 'active';
-                                                                                } ?>">
-                    <i class="feather-file-text mr-3  fa-fw"></i>
-                    Page
-                </a>
-                <a href="<?php echo base_url('admin/layanan'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "layanan") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-file-text mr-3  fa-fw"></i>
-                    Layanan
-                </a>
-                <a href="<?php echo base_url('admin/galery'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "galery") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-camera mr-3  fa-fw"></i>
-                    Galery
-                </a>
-                <a href="<?php echo base_url('admin/video'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "video") {
-                                                                                        echo 'active';
-                                                                                    } ?>">
-                    <i class="feather-film mr-3  fa-fw"></i>
-                    Video
-                </a>
-            </li> -->
-            <p class="text-muted font-weight-bold text-uppercase px-3 small py-2 mb-0"><b>Pengaturan</b></p>
-
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/user'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "user") {
-                                                                                    echo 'active';
-                                                                                } ?>">
-                    <i class="feather-user mr-3  fa-fw"></i>
-                    User
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/meta'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "meta") {
-                                                                                    echo 'active';
-                                                                                } ?>">
-                    <i class="feather-settings mr-3  fa-fw"></i>
-                    Profile Web
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "pengaturan") {
-                                                                                            echo 'active';
-                                                                                        } ?>">
-                    <i class="feather-mail mr-3  fa-fw"></i>
-                    Email Manajemen
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?php echo base_url('admin/menu'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "menu") {
-                                                                                    echo 'active';
-                                                                                } ?>">
-                    <i class="feather-book-open mr-3  fa-fw"></i>
-                    Menu
-                </a>
-            </li>
-        </ul>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
     </div>
-    <!-- End Sidebar -->
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">MAIN</span>
+        </li>
+        <!-- Dashboard -->
+        <li class="menu-item <?php if ($this->uri->segment(2) == "dashboard") {
+                                    echo 'active';
+                                } ?>">
+            <a href="<?php echo base_url('admin/dashboard'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+        <li class="menu-item <?php if ($this->uri->segment(2) == "product") {
+                                    echo 'active';
+                                } ?>">
+            <a href="<?php echo base_url('admin/product'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-package"></i>
+                <div data-i18n="Analytics">Product</div>
+            </a>
+        </li>
+        <li class="menu-item <?php if ($this->uri->segment(2) == "transaction") {
+                                    echo 'active';
+                                } ?>">
+            <a href="<?php echo base_url('admin/transaction'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                <div data-i18n="Analytics">Transaksi</div>
+            </a>
+        </li>
+
+        <!-- Layouts -->
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Web Pages</span>
+        </li>
+        <li class="menu-item <?php if ($this->uri->segment(2) == "category" || $this->uri->segment(2) == "berita") {
+                                    echo 'active open';
+                                } ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Blog</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item <?php if ($this->uri->segment(2) == "berita") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/berita'); ?>" class="menu-link">
+                        <div data-i18n="Without menu">Berita</div>
+                    </a>
+                </li>
+                <li class="menu-item <?php if ($this->uri->segment(2) == "category") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/category'); ?>" class="menu-link">
+                        <div data-i18n="Without navbar">Category</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
+        <!-- Components -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+        <!-- Cards -->
+        <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">AKun Saya</div>
+            </a>
+        </li>
+        <!-- User interface -->
+        <li class="menu-item">
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="User interface">Profile Web</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="ui-accordion.html" class="menu-link">
+                        <div data-i18n="Accordion">Meta</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="ui-alerts.html" class="menu-link">
+                        <div data-i18n="Alerts">Logo</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="ui-badges.html" class="menu-link">
+                        <div data-i18n="Badges">Faficon</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+        <!-- Extended components -->
+        <li class="menu-item">
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div data-i18n="Extended UI">Pengaturan</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                        <div data-i18n="Perfect Scrollbar">Menu</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="extended-ui-text-divider.html" class="menu-link">
+                        <div data-i18n="Text Divider">Email</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="extended-ui-text-divider.html" class="menu-link">
+                        <div data-i18n="Text Divider">Menu</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="extended-ui-text-divider.html" class="menu-link">
+                        <div data-i18n="Text Divider">Whatsapp</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
+    </ul>
+</aside>
+<!-- / Menu -->
