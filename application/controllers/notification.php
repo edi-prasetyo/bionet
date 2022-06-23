@@ -33,12 +33,11 @@ class Notification extends CI_Controller
 	{
 		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result, true);
+		$result = json_decode($json_result, "true");
 
 		$order_id = $result['order_id'];
 		$data = [
 			'status_code'			=> $result['status_code'],
-			'payment_status'		=> $result['transaction_status']
 		];
 		if ($result['status_code'] == 200) {
 			$this->db->update('transaction', $data, array('order_id', $order_id));

@@ -108,17 +108,69 @@ class Order extends CI_Controller
         echo $snapToken;
     }
 
-    public function finish()
+    public function finish($transaksi_id)
     {
-        $result = json_decode($this->input->post('result_data'));
+        $result = json_decode($this->input->post('result_data'), true);
+        // $transaksi_id = json_decode($this->input->post('transaksi_id'));
+        var_dump($result);
+        die;
 
-        $data = array(
-            'title'       => 'Halaman',
-            'deskripsi'   => 'Berita - ',
-            'keywords'    => 'Berita - ',
-            'result'    => $result,
-            'content'     => 'front/order/finish'
-        );
-        $this->load->view('front/layout/wrapp', $data, FALSE);
+
+        if ($result['payment_type'] == 'bank_transfer') {
+
+            $data = [
+                'id'                    => $transaksi_id,
+                'order_id'              => $result['order_id'],
+                'gross_amount'          => $result['gross_amount'],
+                'payment_type'          => $result['payment_type'],
+                'bank'                  => $result['va_numbers'][0]['bank'],
+                'va_number'             => $result['va_numbers'][0]['va_number'],
+                'pdf_url'               => $result['pdf_url'],
+                'status_code'           => $result['status_code'],
+            ];
+            $this->transaction_model->update($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
+            redirect(base_url(), 'refresh');
+        } elseif ($result['payment_type'] == 'cstore') {
+            $data = [
+                'id'                    => $transaksi_id,
+                'order_id'              => $result['order_id'],
+                'gross_amount'          => $result['gross_amount'],
+                'payment_type'          => $result['payment_type'],
+                'payment_code'          => $result['payment_code'],
+                'pdf_url'               => $result['pdf_url'],
+                'status_code'           => $result['status_code'],
+            ];
+            $this->transaction_model->update($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
+            redirect(base_url(), 'refresh');
+        } elseif ($result['payment_type'] == 'echannel') {
+            $data = [
+                'id'                    => $transaksi_id,
+                'order_id'              => $result['order_id'],
+                'gross_amount'          => $result['gross_amount'],
+                'payment_type'          => $result['payment_type'],
+                'bill_key'              => $result['bill_key'],
+                'biller_code'           => $result['biller_code'],
+                'pdf_url'               => $result['pdf_url'],
+                'status_code'           => $result['status_code'],
+            ];
+            $this->transaction_model->update($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
+            redirect(base_url(), 'refresh');
+        } else {
+            $data = [
+                'id'                    => $transaksi_id,
+                'order_id'              => $result['order_id'],
+                'gross_amount'          => $result['gross_amount'],
+                'payment_type'          => $result['payment_type'],
+                // 'permata_va_number'     => $result['permata_va_number'],
+                'pdf_url'               => $result['pdf_url'],
+                'status_code'           => $result['status_code'],
+            ];
+            $this->transaction_model->update($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah di Update</div>');
+            redirect(base_url(), 'refresh');
+        }
     }
 }

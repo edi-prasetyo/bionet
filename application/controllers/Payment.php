@@ -119,7 +119,7 @@ class Payment extends CI_Controller
             $notif = $this->veritrans->status($result->order_id);
         }
 
-        error_log(print_r($result, TRUE));
+        // error_log(print_r($result, TRUE));
 
         //notification handler sample
 
@@ -127,6 +127,11 @@ class Payment extends CI_Controller
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
         $fraud = $notif->fraud_status;
+
+        $data = [
+			'status_code'			=> $result['status_code'],
+			'payment_status'		=> $result['transaction_status']
+		];
 
         if ($transaction == 'capture') {
             // For credit card transaction, we need to check whether transaction is challenge by FDS or not

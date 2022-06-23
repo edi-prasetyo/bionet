@@ -65,10 +65,7 @@ $meta = $this->meta_model->get_meta();
     $menu           = $this->menu_model->get_menu();
     ?>
 
-    <form id="payment-form" method="post" action="<?= base_url() ?>/snap/finish">
-        <input type="hidden" name="result_type" id="result-type" value=""></div>
-        <input type="hidden" name="result_data" id="result-data" value=""></div>
-    </form>
+
 
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm" aria-label="Main navigation">
@@ -203,7 +200,7 @@ $meta = $this->meta_model->get_meta();
             <div class="d-grid gap-2">
 
                 <!-- Midtrans -->
-                <form id="payment-form" method="post" action="<?= site_url() ?>order/finish">
+                <form id="payment-form" method="post" action="<?= site_url('order/finish/' . $transaction->id) ?>">
                     <input type="hidden" name="result_type" id="result-type" value="">
                     <input type="hidden" name="result_data" id="result-data" value="">
                     <input type="hidden" id="gross_amount" name="gross_amount" value="<?php echo $transaction->total_amount; ?>">
@@ -212,10 +209,11 @@ $meta = $this->meta_model->get_meta();
                     <input type="hidden" id="first_name" name="first_name" value="<?php echo $transaction->fullname; ?>">
                     <input type="hidden" id="email" name="email" value="<?php echo $transaction->email; ?>">
                     <input type="hidden" id="phone" name="phone" value="<?php echo $transaction->whatsapp; ?>">
+                    <button class="btn btn-primary btn-block h8" id="pay-button">Bayar <span class="ms-3 fas fa-arrow-right"></span></button>
 
                 </form>
 
-                <button class="btn btn-primary btn-block h8" id="pay-button">Bayar <span class="ms-3 fas fa-arrow-right"></span></button>
+
 
                 <!-- /Midtrans -->
 
