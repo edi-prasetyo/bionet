@@ -112,8 +112,8 @@ class Order extends CI_Controller
     {
         $result = json_decode($this->input->post('result_data'), true);
         // $transaksi_id = json_decode($this->input->post('transaksi_id'));
-        var_dump($result);
-        die;
+        // var_dump($result);
+        // die;
 
 
         if ($result['payment_type'] == 'bank_transfer') {
