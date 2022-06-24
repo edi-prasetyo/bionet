@@ -180,7 +180,7 @@ class Product extends CI_Controller
             $this->create_incoice_number($insert_id);
             $this->sendWhatsapp($insert_id);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Data telah ditambahkan</div>');
-            redirect(base_url('order?id=' . md5($insert_id)), 'refresh');
+            redirect(base_url('payment?id=' . md5($insert_id)), 'refresh');
         }
     }
     public function create_incoice_number($insert_id)
