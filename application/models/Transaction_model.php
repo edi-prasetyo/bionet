@@ -96,6 +96,12 @@ class Transaction_model extends CI_Model
         $this->db->where('id', $data['id']);
         $this->db->update('transaction', $data);
     }
+    //Update Notif Midtrans
+    public function update_notif($data)
+    {
+        $this->db->where('order_id', $data['order_id']);
+        $this->db->update('transaction', $data);
+    }
     public function update_paid($data)
     {
         $this->db->where('id', $data['id']);

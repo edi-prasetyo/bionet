@@ -27,23 +27,37 @@ class Notification extends CI_Controller
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
+
+		$this->load->model('transaction_model');
 	}
 
 	public function index()
 	{
 		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result, true);
-		var_dump($result);
-		die;
+		$result = json_decode($json_result, 'true');
+
 
 		$order_id = $result['order_id'];
 		$data = [
+			'order_id'				=> $order_id,
 			'status_code'			=> $result['status_code'],
 		];
-		if ($result['status_code'] == 200) {
-			$this->db->update('transaction', $data, array('order_id', $order_id));
-		}
+		$this->transaction_model->update_notif($data);
+
+		// echo 'test notification handler';
+		// $json_result = file_get_contents('php://input');
+		// $result = json_decode($json_result, true);
+		// var_dump($result);
+		// die;
+
+		// $order_id = $result['order_id'];
+		// $data = [
+		// 	'status_code'			=> $result['status_code'],
+		// ];
+		// if ($result['status_code'] == 200) {
+		// 	$this->db->update('transaction', $data, array('order_id', $order_id));
+		// }
 
 		// if($result){
 		// $notif = $this->veritrans->status($result->order_id);
