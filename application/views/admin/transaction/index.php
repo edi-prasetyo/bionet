@@ -35,7 +35,15 @@ if ($this->session->flashdata('message')) {
                         <td><?php echo $data->product_name; ?></td>
                         <td><?php echo $data->product_type; ?></td>
                         <td>Rp <?php echo number_format($data->total_amount, 0, ",", "."); ?></td>
-                        <td><span class="badge bg-label-success me-1"><?php echo $data->payment_status; ?></span></td>
+                        <td>
+                            <?php if ($data->status_code == 200) : ?>
+                                <span class="badge bg-label-success me-1">Sukses</span>
+                            <?php else : ?>
+                                <span class="badge bg-label-danger me-1">Pending</span>
+                            <?php endif; ?>
+
+
+                        </td>
                         <td>
                             <a href="<?php echo base_url('admin/transaction/detail/') . $data->id; ?>" class="btn btn-primary text-white btn-sm"><i class="bx bx-ghost"></i> Lihat</a>
                         </td>

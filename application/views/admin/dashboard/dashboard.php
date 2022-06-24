@@ -249,7 +249,7 @@
                 <!-- </div>
     <div class="row"> -->
                 <!-- Order Statistics -->
-                <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
+                <!-- <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
                     <div class="card h-100">
                         <div class="card-header d-flex align-items-center justify-content-between pb-0">
                             <div class="card-title mb-0">
@@ -336,10 +336,9 @@
                         </div>
                     </div>
                 </div>
-                <!--/ Order Statistics -->
+                
             </div>
         </div>
     </div>
 
-</div>
-<!-- / Content -->
+</div> -->
