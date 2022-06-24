@@ -33,7 +33,9 @@ class Notification extends CI_Controller
 	{
 		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result, "true");
+		$result = json_decode($json_result, true);
+		var_dump($result);
+		die;
 
 		$order_id = $result['order_id'];
 		$data = [

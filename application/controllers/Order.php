@@ -129,6 +129,7 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
+            redirect(base_url('notification'), 'refresh');
         } elseif ($result['payment_type'] == 'cstore') {
             $data = [
                 'id'                    => $transaksi_id,
@@ -140,6 +141,7 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
+            redirect(base_url('notification'), 'refresh');
         } elseif ($result['payment_type'] == 'echannel') {
             $data = [
                 'id'                    => $transaksi_id,
@@ -152,6 +154,7 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
+            redirect(base_url('notification'), 'refresh');
         } else {
             $data = [
                 'id'                    => $transaksi_id,
@@ -163,6 +166,7 @@ class Order extends CI_Controller
                 'status_code'           => $result['status_code'],
             ];
             $this->transaction_model->update($data);
+            redirect(base_url('notification'), 'refresh');
         }
     }
 }
