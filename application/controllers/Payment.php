@@ -49,7 +49,7 @@ class Payment extends CI_Controller
             'content'                     => 'front/payment/index'
         );
         $this->load->view('front/layout/wrapp', $data, FALSE);
-        $this->sendWhatsapp($insert_id);
+     
     }
     public function vtweb_checkout()
     {
@@ -120,62 +120,7 @@ class Payment extends CI_Controller
         $this->transaction_model->update($data);
     }
 
-    public function sendWhatsapp($insert_id)
-    {
-        $sender = $this->pengaturan_model->sender();
-        $whatsapp_api = $sender->whatsapp_api;
-        /* Transaction Detail */
-        $transaction = $this->transaction_model->detail($insert_id);
 
-        $apikey = $whatsapp_api;
-        $tujuan = $transaction->whatsapp;
-        $pesan = "
-        Terima kasih telah 
-        melakukan pembelian
-        paket di bionet
-        -------------------------------------
-        Nomor Invoice Anda :
-        *" . $transaction->invoice_number . "*
-        Produk yang di beli :
-        *Paket* *" . $transaction->product_name . "*
-        Nilai Transaksi : 
-        *Rp.* *" . number_format($transaction->total_amount, 0, ",", ".") . "*
-        -------------------------------------
-        Info akun
-        -------------------------------------
-        Nama   : *" . $transaction->fullname . "*
-        No. WA : *" . $transaction->whatsapp . "*
-        Email  : *" . $transaction->email . "*
-        -------‐-----------------------------
-        Klik link di bawah ini untuk
-        Melakukan pembayaran
-        " . base_url('payment?id=' . md5($transaction->id))  . "
-        ‐--------‐---------------------------
-        Terima kasih telah menggunakan layanan 
-        bionet untuk informasi lebih lanjut 
-        hubungi kami di 0812334688";
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://starsender.online/api/sendText?message=' . rawurlencode($pesan) . '&tujuan=' . rawurlencode($tujuan . '@s.whatsapp.net'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_HTTPHEADER => array(
-                'apikey: ' . $apikey
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $response;
-    }
 
     public function notification()
     {
