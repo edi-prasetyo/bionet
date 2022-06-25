@@ -9,13 +9,13 @@ $menu           = $this->menu_model->get_menu();
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm" aria-label="Main navigation">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo base_url(); ?>"><img style="height:60px;" src="<?php echo base_url('assets/img/logo/' . $meta->logo); ?>"></a>
+    <a class="navbar-brand" href="<?php echo base_url(); ?>"><img style="height:50px;" src="<?php echo base_url('assets/img/logo/' . $meta->logo); ?>"></a>
     <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 18px;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 16px;">
         <?php foreach ($menu as $menu) : ?>
           <li class="nav-item me-3 ms-2">
             <?php if ($this->session->userdata('language') == 'EN') : ?>

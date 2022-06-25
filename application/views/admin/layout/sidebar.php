@@ -81,6 +81,13 @@ $meta = $this->meta_model->get_meta();
                         <div data-i18n="Without navbar">Category</div>
                     </a>
                 </li>
+                <li class="menu-item <?php if ($this->uri->segment(2) == "galery") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/galery'); ?>" class="menu-link">
+                        <div data-i18n="Without navbar">Galery</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -89,31 +96,41 @@ $meta = $this->meta_model->get_meta();
         <!-- Components -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
         <!-- Cards -->
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item <?php if ($this->uri->segment(2) == "profile") {
+                                    echo 'active';
+                                } ?>">
+            <a href="<?php echo base_url('admin/profile'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">AKun Saya</div>
             </a>
         </li>
         <!-- User interface -->
-        <li class="menu-item">
+        <li class="menu-item <?php if ($this->uri->segment(2) == "meta" || $this->uri->segment(2) == "logo" || $this->uri->segment(2) == "favicon") {
+                                    echo 'active open';
+                                } ?>">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="User interface">Profile Web</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="ui-accordion.html" class="menu-link">
+                <li class="menu-item <?php if ($this->uri->segment(2) == "meta") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/meta'); ?>" class="menu-link">
                         <div data-i18n="Accordion">Meta</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="ui-alerts.html" class="menu-link">
+                <li class="menu-item <?php if ($this->uri->segment(3) == "logo") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/meta/logo'); ?>" class="menu-link">
                         <div data-i18n="Alerts">Logo</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="ui-badges.html" class="menu-link">
+                <li class="menu-item <?php if ($this->uri->segment(3) == "favicon") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/meta/favicon'); ?>" class="menu-link">
                         <div data-i18n="Badges">Faficon</div>
                     </a>
                 </li>
@@ -122,29 +139,33 @@ $meta = $this->meta_model->get_meta();
         </li>
 
         <!-- Extended components -->
-        <li class="menu-item">
+        <li class="menu-item <?php if ($this->uri->segment(2) == "menu" || $this->uri->segment(2) == "pengaturan" || $this->uri->segment(2) == "sender") {
+                                    echo 'active open';
+                                } ?>">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
                 <div data-i18n="Extended UI">Pengaturan</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                <li class="menu-item <?php if ($this->uri->segment(2) == "menu") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/menu'); ?>" class="menu-link">
                         <div data-i18n="Perfect Scrollbar">Menu</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="extended-ui-text-divider.html" class="menu-link">
+                <li class="menu-item <?php if ($this->uri->segment(2) == "pengaturan") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/pengaturan'); ?>" class="menu-link">
                         <div data-i18n="Text Divider">Email</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="extended-ui-text-divider.html" class="menu-link">
-                        <div data-i18n="Text Divider">Menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="extended-ui-text-divider.html" class="menu-link">
+
+                <li class="menu-item <?php if ($this->uri->segment(2) == "sender") {
+                                            echo 'active';
+                                        } ?>">
+                    <a href="<?php echo base_url('admin/sender'); ?>" class="menu-link">
                         <div data-i18n="Text Divider">Whatsapp</div>
                     </a>
                 </li>

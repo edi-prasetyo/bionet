@@ -14,17 +14,27 @@ class Payment extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Midtrans Payment gateway
-        $params = array('server_key' => 'SB-Mid-server-mtHK4r-ldx88P5K7TkOhcj0R', 'production' => false);
-        $this->load->library('veritrans');
-        $this->veritrans->config($params);
-        $this->load->helper('url');
+
 
         $this->output->enable_profiler(FALSE);
         $this->load->model('product_model');
         $this->load->model('meta_model');
         $this->load->model('transaction_model');
+        $this->load->model('pengaturan_model');
         $this->load->library('pagination');
+
+        $sender = $this->pengaturan_model->sender();
+        $server_key = $sender->midtrans_server_key;
+        $payment_environment = $sender->midtrans_environment;
+        $whatsapp_api = $sender->whatsapp_api;
+        // var_dump($whatsapp_api);
+        // die;
+
+        // Midtrans Payment gateway
+        $params = array('server_key' =>  $server_key, 'production' => $payment_environment);
+        $this->load->library('veritrans');
+        $this->veritrans->config($params);
+        $this->load->helper('url');
     }
     public function index()
     {
@@ -58,20 +68,18 @@ class Payment extends CI_Controller
         // Populate items
         $items = [
             array(
-                'id'                 => 'item1',
-                'price'         => $amount,
-                'quantity'     => 1,
-                'name'             => $name
+                'id'                => 'item1',
+                'price'             => $amount,
+                'quantity'          => 1,
+                'name'              => $name
             ),
 
         ];
 
-
-
         // Populate customer's Info
         $customer_details = array(
-            'first_name'             => $first_name,
-            'last_name'             => "",
+            'first_name'                => $first_name,
+            'last_name'                 => "",
             'email'                     => $email,
             'phone'                     => $phone,
 
@@ -80,14 +88,14 @@ class Payment extends CI_Controller
         // Data yang akan dikirim untuk request redirect_url.
         // Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
         $transaction_data = array(
-            'payment_type'             => 'vtweb',
-            'vtweb'                         => array(
+            'payment_type'              => 'vtweb',
+            'vtweb'                     => array(
                 //'enabled_payments' 	=> ['credit_card'],
                 'credit_card_3d_secure' => true
             ),
-            'transaction_details' => $transaction_details,
+            'transaction_details'       => $transaction_details,
             'item_details'              => $items,
-            'customer_details'      => $customer_details
+            'customer_details'          => $customer_details
         );
         $order_id = $transaction_details['order_id'];
         try {
@@ -109,51 +117,94 @@ class Payment extends CI_Controller
         $this->transaction_model->update($data);
     }
 
+    public function sendWhatsapp($insert_id)
+    {
+        $sender = $this->pengaturan_model->sender();
+        $whatsapp_api = $sender->whatsapp_api;
+        /* Transaction Detail */
+        $transaction = $this->transaction_model->detail($insert_id);
+
+        $apikey = $whatsapp_api;
+        $tujuan = $transaction->whatsapp;
+        $pesan = "Terima kasih telah 
+        melakukan pembelian
+        paket di bionet
+        -------------------------------------
+        Nomor Invoice Anda :
+        *" . $transaction->invoice_number . "*
+        Produk yang di beli :
+        *Paket* *" . $transaction->product_name . "*
+        Nilai Transaksi : 
+        *Rp.* *" . number_format($transaction->total_amount, 0, ",", ".") . "*
+        -------------------------------------
+        Info akun
+        -------------------------------------
+        Nama   : *" . $transaction->fullname . "*
+        No. WA : *" . $transaction->whatsapp . "*
+        Email  : *" . $transaction->email . "*
+        -------‐-----------------------------
+        Klik link di bawah ini untuk
+        Melakukan pembayaran
+        " . base_url('payment?id=' . md5($transaction->id))  . "
+        ‐--------‐---------------------------
+        Terima kasih telah menggunakan layanan 
+        bionet untuk informasi lebih lanjut 
+        hubungi kami di 0812334688";
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://starsender.online/api/sendText?message=' . rawurlencode($pesan) . '&tujuan=' . rawurlencode($tujuan . '@s.whatsapp.net'),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => array(
+                'apikey: ' . $apikey
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $response;
+    }
+
     public function notification()
     {
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
-        $result = json_decode($json_result);
+        $result = json_decode($json_result, 'true');
 
-        if ($result) {
-            $notif = $this->veritrans->status($result->order_id);
-        }
 
-        // error_log(print_r($result, TRUE));
-
-        //notification handler sample
-
-        $transaction = $notif->transaction_status;
-        $type = $notif->payment_type;
-        $order_id = $notif->order_id;
-        $fraud = $notif->fraud_status;
-
-        $data = [
-			'status_code'			=> $result['status_code'],
-			'payment_status'		=> $result['transaction_status']
-		];
-
-        if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    // TODO set payment status in merchant's database to 'Challenge by FDS'
-                    // TODO merchant should decide whether this transaction is authorized or not in MAP
-                    echo "Transaction order_id: " . $order_id . " is challenged by FDS";
-                } else {
-                    // TODO set payment status in merchant's database to 'Success'
-                    echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
-                }
-            }
-        } else if ($transaction == 'settlement') {
-            // TODO set payment status in merchant's database to 'Settlement'
-            echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
-        } else if ($transaction == 'pending') {
-            // TODO set payment status in merchant's database to 'Pending'
-            echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
-        } else if ($transaction == 'deny') {
-            // TODO set payment status in merchant's database to 'Denied'
-            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+        $order_id = $result['order_id'];
+        if ($result['payment_type'] == 'bank_transfer') {
+            $data = [
+                'order_id'                => $order_id,
+                'status_code'            => $result['status_code'],
+                'payment_type'            => $result['payment_type'],
+                'bank'                    => $result['va_numbers'][0]['bank'],
+                'va_number'                => $result['va_numbers'][0]['va_number']
+            ];
+            $this->transaction_model->update_notif($data);
+        } elseif ($result['payment_type'] == 'cstore') {
+            $data = [
+                'order_id'                => $order_id,
+                'status_code'            => $result['status_code'],
+                'payment_type'            => $result['payment_type'],
+                'payment_code'            => $result['payment_code'],
+            ];
+            $this->transaction_model->update_notif($data);
+        } else {
+            $data = [
+                'order_id'                => $order_id,
+                'status_code'            => $result['status_code'],
+                'payment_type'            => $result['payment_type'],
+            ];
+            $this->transaction_model->update_notif($data);
         }
     }
 }

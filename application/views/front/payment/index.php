@@ -43,46 +43,30 @@
                         <p class="">Total Amount</p>
                         <p class="ms-auto">Rp. <?php echo number_format($transaction->total_amount, 0, ",", "."); ?></p>
                     </div>
-                    <div class="h8 mb-5">
-                        <p class="alert alert-danger">Silahkan lakukan Pembayaran Sebelum tanggal 14 januari 2022 </p>
-                    </div>
+
                 </div>
 
 
 
+                <!-- Midtrans -->
+
+
+                <form action="<?php echo site_url() ?>payment/vtweb_checkout" method="POST" id="payment-form">
+                    <input type="hidden" id="transaksi_id" name="transaksi_id" value="<?php echo $transaction->id; ?>">
+                    <input type="hidden" id="gross_amount" name="gross_amount" value="<?php echo $transaction->total_amount; ?>">
+                    <input type="hidden" id="amount" name="amount" value="<?php echo $transaction->amount; ?>">
+                    <input type="hidden" id="name" name="name" value="<?php echo $transaction->product_name; ?>">
+                    <input type="hidden" id="first_name" name="first_name" value="<?php echo $transaction->fullname; ?>">
+                    <input type="hidden" id="email" name="email" value="<?php echo $transaction->email; ?>">
+                    <input type="hidden" id="phone" name="phone" value="<?php echo $transaction->whatsapp; ?>">
+
+
+                    <button class="btn btn-success" type="submit">Submit Payment</button>
+                </form>
+
+                <!-- /Midtrans -->
+
             </div>
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<div class="form my-5 pt-5">
-    <div class="container">
-        <div class="d-grid gap-2">
-
-            <!-- Midtrans -->
-
-
-            <form action="<?php echo site_url() ?>payment/vtweb_checkout" method="POST" id="payment-form">
-                <input type="hidden" id="transaksi_id" name="transaksi_id" value="<?php echo $transaction->id; ?>">
-                <input type="hidden" id="gross_amount" name="gross_amount" value="<?php echo $transaction->total_amount; ?>">
-                <input type="hidden" id="amount" name="amount" value="<?php echo $transaction->amount; ?>">
-                <input type="hidden" id="name" name="name" value="<?php echo $transaction->product_name; ?>">
-                <input type="hidden" id="first_name" name="first_name" value="<?php echo $transaction->fullname; ?>">
-                <input type="hidden" id="email" name="email" value="<?php echo $transaction->email; ?>">
-                <input type="hidden" id="phone" name="phone" value="<?php echo $transaction->whatsapp; ?>">
-
-
-                <button class="submit-button" type="submit">Submit Payment</button>
-            </form>
-
-
-
-            <!-- /Midtrans -->
-
         </div>
     </div>
 </div>

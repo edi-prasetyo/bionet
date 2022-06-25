@@ -66,4 +66,18 @@ class Pengaturan_model extends CI_Model
     $query = $this->db->get();
     return $query->row();
   }
+
+  public function sender()
+  {
+    $this->db->select('*');
+    $this->db->from('setting_whatsapp');
+    $this->db->where('id', 1);
+    $query = $this->db->get();
+    return $query->row();
+  }
+  public function update_sender($data)
+  {
+    $this->db->where('id', $data['id']);
+    $this->db->update('setting_whatsapp', $data);
+  }
 }
