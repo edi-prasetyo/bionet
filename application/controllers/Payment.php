@@ -26,7 +26,7 @@ class Payment extends CI_Controller
         $sender = $this->pengaturan_model->sender();
         $server_key = $sender->midtrans_server_key;
         $payment_environment = $sender->midtrans_environment;
-        $whatsapp_api = $sender->whatsapp_api;
+
         // var_dump($whatsapp_api);
         // die;
 
@@ -206,5 +206,13 @@ class Payment extends CI_Controller
             ];
             $this->transaction_model->update_notif($data);
         }
+    }
+
+    public function finish()
+    {
+        $result = json_decode($this->input->post('result_data'));
+        echo 'RESULT <br><pre>';
+        var_dump($result);
+        echo '</pre>';
     }
 }
