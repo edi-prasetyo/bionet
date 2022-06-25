@@ -49,6 +49,7 @@ class Payment extends CI_Controller
             'content'                     => 'front/payment/index'
         );
         $this->load->view('front/layout/wrapp', $data, FALSE);
+        $this->sendWhatsapp($insert_id);
     }
     public function vtweb_checkout()
     {
@@ -98,6 +99,7 @@ class Payment extends CI_Controller
             'customer_details'          => $customer_details
         );
         $order_id = $transaction_details['order_id'];
+
         try {
             $vtweb_url = $this->veritrans->vtweb_charge($transaction_data);
             header('Location: ' . $vtweb_url);
@@ -108,7 +110,7 @@ class Payment extends CI_Controller
     }
     public function insert_payment($vtweb_url, $transaksi_id, $order_id)
     {
-        $insert_id = $transaksi_id;
+
         $data  = [
             'id'                    => $transaksi_id,
             'payment_url'           => $vtweb_url,
@@ -116,7 +118,6 @@ class Payment extends CI_Controller
 
         ];
         $this->transaction_model->update($data);
-        $this->sendWhatsapp($insert_id);
     }
 
     public function sendWhatsapp($insert_id)
@@ -194,6 +195,7 @@ class Payment extends CI_Controller
                 'va_number'                => $result['va_numbers'][0]['va_number']
             ];
             $this->transaction_model->update_notif($data);
+            redirect(base_url('payment/finish'), 'refresh');
         } elseif ($result['payment_type'] == 'cstore') {
             $data = [
                 'order_id'                => $order_id,
@@ -203,6 +205,7 @@ class Payment extends CI_Controller
                 'payment_code'            => $result['payment_code'],
             ];
             $this->transaction_model->update_notif($data);
+            redirect(base_url('payment/finish'), 'refresh');
         } else {
             $data = [
                 'order_id'                => $order_id,
@@ -211,6 +214,7 @@ class Payment extends CI_Controller
                 'payment_type'            => $result['payment_type'],
             ];
             $this->transaction_model->update_notif($data);
+            redirect(base_url('payment/finish'), 'refresh');
         }
     }
 
