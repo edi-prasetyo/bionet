@@ -34,10 +34,10 @@
 
             <label for="exampleFormControlSelect1" class="form-label">Environment</label>
             <select class="form-select" name="midtrans_environment">
-                <option value="false" <?php if ($sender->midtrans_environment == false) {
+                <option value="false" <?php if ($sender->midtrans_environment == 'false') {
                                             echo "selected";
                                         }; ?>>Sandbox</option>
-                <option value="true" <?php if ($sender->midtrans_environment == true) {
+                <option value="true" <?php if ($sender->midtrans_environment == 'true') {
                                             echo "selected";
                                         }; ?>>Production</option>
             </select>
