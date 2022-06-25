@@ -60,8 +60,11 @@
                     <input type="hidden" id="email" name="email" value="<?php echo $transaction->email; ?>">
                     <input type="hidden" id="phone" name="phone" value="<?php echo $transaction->whatsapp; ?>">
 
-
-                    <button class="btn btn-success" type="submit">Submit Payment</button>
+                    <?php if ($transaction->status_code == 200) : ?>
+                        <div class="alert alert-success">Transakasi Sudah Di bayar</div>
+                    <?php else : ?>
+                        <button class="btn btn-success" type="submit">Submit Payment</button>
+                    <?php endif; ?>
                 </form>
 
                 <!-- /Midtrans -->
