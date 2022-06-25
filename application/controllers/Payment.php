@@ -186,6 +186,7 @@ class Payment extends CI_Controller
                 'order_id'                => $order_id,
                 'status_code'            => $result['status_code'],
                 'payment_type'            => $result['payment_type'],
+                'gross_amount'            => $result['gross_amount'],
                 'bank'                    => $result['va_numbers'][0]['bank'],
                 'va_number'                => $result['va_numbers'][0]['va_number']
             ];
@@ -195,6 +196,7 @@ class Payment extends CI_Controller
                 'order_id'                => $order_id,
                 'status_code'            => $result['status_code'],
                 'payment_type'            => $result['payment_type'],
+                'gross_amount'            => $result['gross_amount'],
                 'payment_code'            => $result['payment_code'],
             ];
             $this->transaction_model->update_notif($data);
@@ -202,6 +204,7 @@ class Payment extends CI_Controller
             $data = [
                 'order_id'                => $order_id,
                 'status_code'            => $result['status_code'],
+                'gross_amount'            => $result['gross_amount'],
                 'payment_type'            => $result['payment_type'],
             ];
             $this->transaction_model->update_notif($data);
@@ -210,9 +213,22 @@ class Payment extends CI_Controller
 
     public function finish()
     {
-        $result = json_decode($this->input->post('result_data'));
-        echo 'RESULT <br><pre>';
-        var_dump($result);
-        echo '</pre>';
+
+        echo 'Finish';
+    }
+    public function unfinish()
+    {
+
+        echo 'Unfinish';
+    }
+    public function error()
+    {
+
+        echo 'Error';
+    }
+    public function handling()
+    {
+
+        echo 'handling';
     }
 }
