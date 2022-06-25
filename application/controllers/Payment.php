@@ -108,6 +108,7 @@ class Payment extends CI_Controller
     }
     public function insert_payment($vtweb_url, $transaksi_id, $order_id)
     {
+        $insert_id = $transaksi_id;
         $data  = [
             'id'                    => $transaksi_id,
             'payment_url'           => $vtweb_url,
@@ -115,6 +116,7 @@ class Payment extends CI_Controller
 
         ];
         $this->transaction_model->update($data);
+        $this->sendWhatsapp($insert_id);
     }
 
     public function sendWhatsapp($insert_id)
