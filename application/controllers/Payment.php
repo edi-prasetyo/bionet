@@ -128,7 +128,8 @@ class Payment extends CI_Controller
 
         $apikey = $whatsapp_api;
         $tujuan = $transaction->whatsapp;
-        $pesan = "Terima kasih telah 
+        $pesan = "
+        Terima kasih telah 
         melakukan pembelian
         paket di bionet
         -------------------------------------
